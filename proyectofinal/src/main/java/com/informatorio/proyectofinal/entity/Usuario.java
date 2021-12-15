@@ -1,5 +1,6 @@
 package com.informatorio.proyectofinal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.informatorio.proyectofinal.dto.TipoUsuario;
 import org.hibernate.annotations.CreationTimestamp;
 import org.jasypt.util.text.BasicTextEncryptor;
@@ -7,6 +8,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -19,7 +21,8 @@ public class Usuario{
     private String nombre;
     private String apellido;
     @Column(unique = true)
-    @Email(regexp = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
+    @Email(message = "Email no válido.", regexp="^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
+    @NotEmpty(message = "El campo email es obligatorio")
     private String email;
     private String password;
     @CreationTimestamp
@@ -27,7 +30,7 @@ public class Usuario{
     private String ciudad;
     private String provincia;
     private String pais;
-    private TipoUsuario tipoUsuario;
+    private TipoUsuario tipoUsuario = TipoUsuario.USUARIO;
     private Boolean activo;
 
     public Usuario() {
@@ -122,6 +125,10 @@ public class Usuario{
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

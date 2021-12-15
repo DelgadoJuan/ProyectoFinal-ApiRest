@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "c28c76d0-9c5b-4c6b-862b-bd85ca3adf57",
+		"name": "Info",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Proyecto Final",
+			"item": [
+				{
+					"name": "Usuarios",
+					"item": [
+						{
+							"name": "Obtener todos los usuarios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/usuario",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear usuario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Lionel\",\r\n    \"apellido\": \"Messi\",\r\n    \"email\": \"liomessi@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"ciudad\": \"Resistencia\",\r\n    \"provincia\": \"Chaco\",\r\n    \"pais\": \"Argentina\",\r\n    \"activo\": \"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/usuario",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener todos los usuarios de Resistencia",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/usuario/resistencia",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"usuario",
+										"resistencia"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener por fecha",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": null
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar usuario",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Lionel\",\r\n    \"apellido\": \"Messi\",\r\n    \"email\": \"liomessi@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"ciudad\": \"Resistencia\",\r\n    \"provincia\": \"Chaco\",\r\n    \"pais\": \"Argentina\",\r\n    \"activo\": \"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/usuario/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"usuario",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Eventos",
+					"item": [
+						{
+							"name": "Crear evento",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"detalle\": \"Sobre hardware\",\r\n    \"fechaCierre\": \"2022-01-12\",\r\n    \"estado\": \"ABIERTO\",\r\n    \"premio\": \"500000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/evento",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"evento"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener ranking",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/evento/1/ranking",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"evento",
+										"1",
+										"ranking"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar evento",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/evento/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"evento",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar evento",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"detalle\": \"Sobre hardware\",\r\n    \"fechaCierre\": \"2022-01-12\",\r\n    \"estado\": \"ABIERTO\",\r\n    \"premio\": \"500000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/evento/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"evento",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Emprendimientos",
+					"item": [
+						{
+							"name": "Crear emprendimiento",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Samsung\",\r\n    \"descripcion\": \"Empresa dedicada a la fabricacion de celulares y electrodomesticos.\",\r\n    \"objetivo\": \"50000\",\r\n    \"publicado\": false,\r\n    \"eventoId\": \"1\",\r\n    \"usuarioId\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/emprendimiento",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"emprendimiento"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener no publicados",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/emprendimiento/nopublicado",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"emprendimiento",
+										"nopublicado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agregar tag",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Celulares\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/emprendimiento/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"emprendimiento",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar por tag",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/emprendimiento?tag=Celu",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"emprendimiento"
+									],
+									"query": [
+										{
+											"key": "tag",
+											"value": "Celu"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener todos los emprendimientos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/emprendimiento",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"emprendimiento"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Votos",
+					"item": [
+						{
+							"name": "Crear voto",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuarioId\": \"2\",\r\n    \"emprendimientoId\": \"1\",\r\n    \"generadoPor\": \"MOBILE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/voto",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"voto"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Todos los votos de un usuario",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": null
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

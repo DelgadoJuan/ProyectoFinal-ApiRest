@@ -1,11 +1,14 @@
 package com.informatorio.proyectofinal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.informatorio.proyectofinal.dto.Estado;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,16 +21,17 @@ public class Evento {
     private String detalle;
     @CreationTimestamp
     private LocalDateTime fechaCreacion;
-    private LocalDateTime fechaCierre;
+    private LocalDate fechaCierre;
     private Estado estado;
     @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Emprendimiento> emprendimientos = new ArrayList<>();
     private BigInteger premio;
 
     public Evento() {
     }
 
-    public Evento(String detalle, LocalDateTime fechaCierre, Estado estado, List<Emprendimiento> emprendimientos, BigInteger premio) {
+    public Evento(String detalle, LocalDate fechaCierre, Estado estado, List<Emprendimiento> emprendimientos, BigInteger premio) {
         this.detalle = detalle;
         this.fechaCierre = fechaCierre;
         this.estado = estado;
@@ -47,7 +51,7 @@ public class Evento {
         return fechaCreacion;
     }
 
-    public LocalDateTime getFechaCierre() {
+    public LocalDate getFechaCierre() {
         return fechaCierre;
     }
 
@@ -60,7 +64,7 @@ public class Evento {
         this.detalle = detalle;
     }
 
-    public void setFechaCierre(LocalDateTime fechaCierre) {
+    public void setFechaCierre(LocalDate fechaCierre) {
         this.fechaCierre = fechaCierre;
     }
 

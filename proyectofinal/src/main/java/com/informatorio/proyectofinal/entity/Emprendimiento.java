@@ -1,12 +1,13 @@
 package com.informatorio.proyectofinal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
-import com.informatorio.proyectofinal.entity.Evento;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ public class Emprendimiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
+    @Column(unique = true)
     private String nombre;
     private String descripcion;
     private String contenido;
@@ -23,29 +25,47 @@ public class Emprendimiento {
     private LocalDateTime fechaCreacion;
     private BigInteger objetivo;
     private Boolean publicado;
-    private String url;
-    private String tags;
+    @OneToOne
+    @JoinColumn(name = "creador_id")
+    @JsonIgnore
+    private Usuario creador;
+    @OneToMany(mappedBy = "emprendimiento", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Url> urls;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "emprendimiento_id",
+            joinColumns = @JoinColumn(name = "emprendimiento_id"),
+            inverseJoinColumns = @JoinColumn(name = "tags_id")
+    )
+    @JsonIgnore
+    private List<Tags> tags = new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Evento evento;
-    private Boolean activo;
     @OneToMany(mappedBy = "emprendimiento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Voto> votos;
+    private int cantidadVotos = 0;
+
+    public Usuario getCreador() {
+        return creador;
+    }
+
+    public void setCreador(Usuario creador) {
+        this.creador = creador;
+    }
 
     public Emprendimiento() {
     }
 
     public Emprendimiento(String nombre, String descripcion, String contenido, BigInteger objetivo,
-                          Boolean publicado, String url, String tags, Evento evento, Boolean activo, List<Voto> votos) {
+                          Boolean publicado, Usuario creador, Evento evento, Boolean activo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.contenido = contenido;
         this.objetivo = objetivo;
         this.publicado = publicado;
-        this.url = url;
-        this.tags = tags;
+        this.creador = creador;
         this.evento = evento;
-        this.activo = activo;
-        this.votos = votos;
     }
 
     public Long getId() {
@@ -76,14 +96,6 @@ public class Emprendimiento {
         return publicado;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public String getTags() {
-        return tags;
-    }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -104,22 +116,6 @@ public class Emprendimiento {
         this.publicado = publicado;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -128,12 +124,12 @@ public class Emprendimiento {
         return id.equals(that.id) && nombre.equals(that.nombre) && Objects.equals(descripcion, that.descripcion) &&
                 Objects.equals(contenido, that.contenido) && fechaCreacion.equals(that.fechaCreacion) &&
                 Objects.equals(objetivo, that.objetivo) && publicado.equals(that.publicado) &&
-                Objects.equals(url, that.url) && Objects.equals(tags, that.tags) && Objects.equals(votos, that.votos);
+                Objects.equals(urls, that.urls) && Objects.equals(tags, that.tags) && Objects.equals(votos, that.votos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, descripcion, contenido, fechaCreacion, objetivo, publicado, url, tags);
+        return Objects.hash(id, nombre, descripcion, contenido, fechaCreacion, objetivo, publicado, urls, tags);
     }
 
     @Override
@@ -146,7 +142,7 @@ public class Emprendimiento {
                 ", fechaCreacion=" + fechaCreacion +
                 ", objetivo=" + objetivo +
                 ", publicado=" + publicado +
-                ", url='" + url + '\'' +
+                ", url='" + urls + '\'' +
                 ", tags='" + tags + '\'' +
                 ", votos='" + votos + '\'' +
                 '}';
@@ -172,5 +168,36 @@ public class Emprendimiento {
     public void eliminarVoto(Voto voto) {
         votos.remove(voto);
         voto.setEmprendimiento(null);
+    }
+
+    public List<Url> getUrls() {
+        return urls;
+    }
+
+    public List<Tags> getTags() {
+        return tags;
+    }
+
+    public void agregarTag(Tags tag) {
+        tags.add(tag);
+        tag.getEmprendimiento().add(this);
+    }
+
+    /*public void agregarUrl(Tags tag) {
+        tags.add(tag);
+        tag.setEmprendimiento(this);
+    }
+
+    public void eliminarUrl(Url url) {
+        tags.add(tag);
+        url.(null);
+    } */
+
+    public int getCantidadVotos() {
+        return cantidadVotos;
+    }
+
+    public void setCantidadVotos(int cantidadVotos) {
+        this.cantidadVotos = cantidadVotos;
     }
 }

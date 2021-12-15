@@ -1,5 +1,6 @@
 package com.informatorio.proyectofinal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.informatorio.proyectofinal.dto.Plataforma;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -14,10 +15,12 @@ public class Voto {
     private Long id;
     private Plataforma generadoPor;
     @OneToOne
+    @JsonIgnore
     private Usuario usuario;
     @CreationTimestamp
     private LocalDateTime fechaCreacion;
     @ManyToOne
+    @JsonIgnore
     private Emprendimiento emprendimiento;
 
     public Voto() {
@@ -63,7 +66,8 @@ public class Voto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Voto voto = (Voto) o;
-        return id.equals(voto.id) && generadoPor == voto.generadoPor && Objects.equals(usuario, voto.usuario) && fechaCreacion.equals(voto.fechaCreacion) && Objects.equals(emprendimiento, voto.emprendimiento);
+        return id.equals(voto.id) && generadoPor == voto.generadoPor && Objects.equals(usuario, voto.usuario) &&
+                fechaCreacion.equals(voto.fechaCreacion) && Objects.equals(emprendimiento, voto.emprendimiento);
     }
 
     @Override
