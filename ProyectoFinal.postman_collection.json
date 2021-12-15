@@ -80,7 +80,22 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": null
+								"url": {
+									"raw": "localhost:8080/usuario?fecha=2021-12-12",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"usuario"
+									],
+									"query": [
+										{
+											"key": "fecha",
+											"value": "2021-12-12"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -190,7 +205,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"detalle\": \"Sobre hardware\",\r\n    \"fechaCierre\": \"2022-01-12\",\r\n    \"estado\": \"ABIERTO\",\r\n    \"premio\": \"500000\"\r\n}",
+									"raw": "{\r\n    \"detalle\": \"Sobre hardware\",\r\n    \"fechaCierre\": \"2022-01-12\",\r\n    \"estado\": \"ABIERTO\",\r\n    \"premio\": \"60000\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -249,14 +264,19 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/emprendimiento/nopublicado",
+									"raw": "localhost:8080/emprendimiento?publicado=true",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"emprendimiento",
-										"nopublicado"
+										"emprendimiento"
+									],
+									"query": [
+										{
+											"key": "publicado",
+											"value": "true"
+										}
 									]
 								}
 							},
@@ -277,14 +297,15 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/emprendimiento/2",
+									"raw": "localhost:8080/emprendimiento/1/tag",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"emprendimiento",
-										"2"
+										"1",
+										"tag"
 									]
 								}
 							},
@@ -296,7 +317,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/emprendimiento?tag=Celu",
+									"raw": "localhost:8080/emprendimiento?tag=Cel",
 									"host": [
 										"localhost"
 									],
@@ -307,7 +328,7 @@
 									"query": [
 										{
 											"key": "tag",
-											"value": "Celu"
+											"value": "Cel"
 										}
 									]
 								}
@@ -331,6 +352,34 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Modificar emprendimiento",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Samsung\",\r\n    \"descripcion\": \"Empresa dedicada a la fabricacion de celulares y electrodomesticos.\",\r\n    \"objetivo\": \"70000\",\r\n    \"publicado\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/emprendimiento/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"emprendimiento",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -344,7 +393,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"usuarioId\": \"2\",\r\n    \"emprendimientoId\": \"1\",\r\n    \"generadoPor\": \"MOBILE\"\r\n}",
+									"raw": "{\r\n    \"usuarioId\": \"1\",\r\n    \"emprendimientoId\": \"2\",\r\n    \"generadoPor\": \"MOBILE\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -369,7 +418,17 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": null
+								"url": {
+									"raw": "localhost:8080/voto/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"voto",
+										"2"
+									]
+								}
 							},
 							"response": []
 						}

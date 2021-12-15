@@ -53,11 +53,25 @@ public class EmprendimientoController {
         return new ResponseEntity<>(emprendimientoService.obtenerTodos(), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{emprendimientoId}")
+    @PutMapping(value = "/{emprendimientoId}/tag")
     public ResponseEntity<?> agregarTag(@RequestBody String nombre,
                                         @PathVariable("emprendimientoId") Long id) throws Exception {
         emprendimientoService.agregarTag(nombre, id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/{emprendimientoId}")
+    public ResponseEntity<?> modificarEmprendimiento(@PathVariable("emprendimientoId") Long id,
+                                                     @RequestBody @Valid EmprendimientoDto emprendimientoDto)
+            throws Exception {
+        Emprendimiento emprendimientoExistente = emprendimientoRepository.findById(id)
+                .orElseThrow(() -> new Exception("No existe ese evento."));
+        emprendimientoExistente.setNombre(emprendimientoDto.getNombre());
+        emprendimientoExistente.setDescripcion(emprendimientoDto.getDescripcion());
+        emprendimientoExistente.setContenido(emprendimientoDto.getContenido());
+        emprendimientoExistente.setObjetivo(emprendimientoDto.getObjetivo());
+        emprendimientoExistente.setPublicado(emprendimientoDto.getPublicado());
+        return new ResponseEntity<>(emprendimientoRepository.save(emprendimientoExistente), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{emprendimientoId}")

@@ -16,7 +16,7 @@ public class UsuarioDto {
     @NotEmpty(message = "El campo email es obligatorio")
     @Column(unique = true)
     private String email;
-    @JsonIgnore
+    @NotBlank
     private String password;
     private String ciudad;
     private String provincia;
